@@ -1,0 +1,48 @@
+[build-system]
+requires = [
+  "setuptools>=61",
+  "setuptools_scm",
+  "wheel"
+]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wsianon"
+dynamic = ["version"]
+description = "Whole Slide Images anonymization library"
+readme = "README.md"
+requires-python = ">=3.8"
+license = { file = "LICENSE" }
+keywords = []
+authors = [
+  { name = "luciorq", email = "luciorqueiroz@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+  "Topic :: Scientific/Engineering :: Bio-Informatics",
+  "Topic :: Scientific/Engineering :: Image Processing",
+  "Topic :: Scientific/Engineering :: Image Recognition",
+  "Topic :: Scientific/Engineering :: Medical Science Apps.",
+  "Topic :: Software Development :: Libraries :: Python Modules",
+]
+dependencies = []
+
+[project.urls]
+Documentation = "https://github.com/luciorq/wsianon#readme"
+Issues = "https://github.com/luciorq/wsianon/issues"
+Source = "https://github.com/luciorq/wsianon"
+
+# [tool.setuptools]
+# py-modules = ["wsianon"]
+
+[tool.setuptools_scm]
+version_file = "src/wsianon/__about__.py"
