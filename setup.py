@@ -16,6 +16,7 @@ for f in files_to_remove:
 header_files = glob.glob('include/*.h')
 
 setup(
+    name = "wsianon",
     ext_modules=[
         Extension(
             name="wsianon.libwsianon",
