@@ -2,6 +2,23 @@
 
 ## Building Python Package
 
+New module code written in `src/wsianon` directory.
+
+### Syncing C library from remote
+
+```bash
+git clone -b macos-support https://github.com/luciorq/wsi-anon ./temp/;
+rm -rf ./include/*;
+cp -r temp/src/* ./include/;
+```
+
+---
+
+## First try using Hatch
+
+> NOTE: Not working properly, since you still needs to compile the C library
+using `setuptools`. Development will move to setuptools entirely.
+
 Using [Hatch](https://hatch.pypa.io/latest/) for Package Management.
 
 ### Create hatch env
@@ -13,10 +30,14 @@ hatch new --init;
 ```
 ### Create Python development env with conda
 
+Test environment: `pytest`, `openslide`, and `tiffslide` are using for testing,
+they are not required for building or using the package.
+
 ```bash
-conda create -n wsianon-env -y python ipykernel pytest tiffslide openslide openslide-python;
+# Test environment
+conda create -n wsianon-env -y python pytest tiffslide openslide openslide-python;
 # TODO: @luciorq Not working as expected
-# conda activate wsianon-env; positron .;
+conda activate wsianon-env;
 ```
 
 ### Copy source code from Upstream
@@ -28,7 +49,7 @@ git clone -b macos-support https://github.com/luciorq/wsi-anon ./temp/;
 \mkdir -p ./src/wsianon;
 \cp -r ./temp/wrapper/python/* ./src/wsianon/;
 \mkdir -p ./include/;
-\mkdir -p ./lib/;
+# \mkdir -p ./lib/;
 cp -r temp/src/* ./include/;
 ```
 
