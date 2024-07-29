@@ -17,7 +17,7 @@ retrieve metadata from WSI files.
 Directly from GitHub:
 
 ```bash
-python -m pip install git+https://github.com/luciorq/wsianon.git
+python -m pip install --upgrade 'git+https://github.com/luciorq/wsianon.git'
 ```
 
 <!--
