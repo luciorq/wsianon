@@ -10,6 +10,8 @@ New module code written in `src/wsianon` directory.
 git clone -b macos-support https://github.com/luciorq/wsi-anon ./temp/;
 rm -rf ./include/*;
 cp -r temp/src/* ./include/;
+cp temp/LICENSE ./include/;
+rm -rf ./temp;
 ```
 
 ---
