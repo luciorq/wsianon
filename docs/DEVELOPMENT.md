@@ -14,8 +14,13 @@ cp temp/LICENSE ./include/;
 rm -rf ./temp;
 ```
 
+### Test data
+
+Test data is acquired from the [Openslide project](https://openslide.cs.cmu.edu/download/openslide-testdata/).
+
 ---
 
+<!--
 ## First try using Hatch
 
 > NOTE: Not working properly, since you still needs to compile the C library
@@ -132,6 +137,7 @@ conda run -n wsianon-env python setup.py build;
 conda run -n wsianon-env python setup.py install;
 ```
 
+-->
 
 ---
 
