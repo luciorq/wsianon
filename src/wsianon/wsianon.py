@@ -1,10 +1,9 @@
 import ctypes
 import threading
-# import platform
 from typing import Optional
 import glob
 
-from .model.model import WSIData
+from .model import WSIData
 
 lock = threading.Lock()
 
@@ -102,3 +101,32 @@ def anonymize_wsi(
         )
 
     return result
+
+"""
+CLI script
+"""
+
+def main() -> int:
+    import argparse
+    parser = argparse.ArgumentParser(
+        description='Anonymize Whole Slide Images'
+    )
+    parser.add_argument(
+        '--input', type = str, required = True,
+        help='the path to the WSI file'
+    )
+    parser.add_argument(
+        '--label', type = str, required = True,
+        help='the new label name'
+    )
+    parser.add_argument(
+       "-m", "--macro", action = "store_true",
+       help = "keep the macro image"
+    )
+    args = parser.parse_args()
+    return_value = anonymize_wsi(
+        filename = args.input,
+        new_label_name = args.label,
+        keep_macro_image = args.macro
+    )
+    return return_value
