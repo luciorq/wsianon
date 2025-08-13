@@ -25,5 +25,8 @@ setup(
             dependencies=header_files,
             include_dirs=["src", "include"],
         ),
-    ]
+    ],
+    entry_points = {
+        'console_scripts': ['wsianon=wsianon:main']
+    }
 )

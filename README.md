@@ -20,19 +20,23 @@ Directly from GitHub:
 python -m pip install --upgrade 'git+https://github.com/luciorq/wsianon.git'
 ```
 
-<!--
-```bash
-git clone https://github.com/luciorq/wsianon.git
-cd wsianon
-python -m pip install .
-```
--->
-
 ```python
 import wsianon
 
 # Anonymize a WSI file
 wsianon.anonymize_wsi("path/to/input.svs|ndpi|mrsx", new_label_name="anonymized_wsi")
+```
+
+From the command line
+
+```bash
+python -m wsianon --input 'path/to/input.svs|ndpi|mrsx' --label "anonymized_wsi"
+```
+
+Or simply if installed in the right path
+
+```bash
+wsianon --input 'path/to/input.svs|ndpi|mrsx' --label "anonymized_wsi"
 ```
 
 ## Acknowledgements
