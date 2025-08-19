@@ -1,5 +1,7 @@
 # `wsianon` Development Notes
 
+This file is used to track the initial experimentation with the build tools.
+
 ## Building Python Package
 
 New module code written in `src/wsianon` directory.
@@ -7,7 +9,11 @@ New module code written in `src/wsianon` directory.
 ### Syncing C library from remote
 
 ```bash
-git clone -b macos-support https://github.com/luciorq/wsi-anon ./temp/;
+# TODO: @luciorq `macos-support` has already been merged in the main (master) branch.
+# Initial clone: `git clone -b macos-support https://github.com/luciorq/wsi-anon ./temp/`;
+
+git clone -b macos-support https://github.com/luciorq/wsi-anon ./temp/
+
 rm -rf ./include/*;
 cp -r temp/src/* ./include/;
 cp temp/LICENSE ./include/;
@@ -193,4 +199,47 @@ git remote -v;
 git push origin-gh --all;
 
 gh repo view --web;
+```
+
+---
+
+## Updating After Merge and Update of Upstream
+
+Working again on this project for the URSSI 2025 Summer School.
+
+Date: 2025-08-18.
+
+```bash
+cd ~/projects/wsianon
+
+git -C ~/projects/forks/wsi-anon/ status
+git -C ~/projects/forks/wsi-anon/ remote -v
+# origin  https://gitlab.com/luciorq/wsi-anon
+# origin-gh       https://github.com/luciorq/wsi-anon
+# upstream        https://gitlab.com/empaia/integration/wsi-anon
+
+# Go to <https://gitlab.com/luciorq/wsi-anon> and make sure to sync fork
+git -C ~/projects/forks/wsi-anon/ fetch
+git -C ~/projects/forks/wsi-anon/ branch
+
+git -C ~/projects/forks/wsi-anon/ pull
+
+git -C ~/projects/forks/wsi-anon/ log --graph --pretty=format:"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) %C(cyan)<%an>%Creset" --abbrev-commit;
+
+# Prepare build project
+ls -lah ./include;
+rm -rf ./include/*;
+ls -lah ~/projects/forks/wsi-anon/src/;
+cp -r ~/projects/forks/wsi-anon/src/* ./include/;
+ls -lah ~/projects/forks/wsi-anon/;
+cp ~/projects/forks/wsi-anon/LICENSE ./include/;
+rm -rf ./temp;
+```
+
+Trying pixi with pip for installing deps;
+
+```bash
+pixi add python pip;
+pixi run python -m pip install -e ".[examples,docs,tests]";
+
 ```

@@ -48,3 +48,8 @@ This project is based on the EMPAIA WSI Anon C library. Special thanks to the co
 For development instructions,
 refer to the documentation [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md).
 
+```bash
+pixi init;
+pixi add python pip;
+pixi run python -m pip install -e ".[examples,docs,tests]";
+```
