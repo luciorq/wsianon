@@ -241,5 +241,5 @@ Trying pixi with pip for installing deps;
 ```bash
 pixi add python pip;
 pixi run python -m pip install -e ".[examples,docs,tests]";
-
+pixi run python -m pytest -vvv;
 ```
