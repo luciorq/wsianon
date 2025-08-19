@@ -11,14 +11,14 @@ char *get_app_name() {
 }
 
 void print_help_message() {
-    fprintf(stderr, "Usage: %s [FILE] [-OPTIONS]\n\n", get_app_name());
-    fprintf(stderr, "OPTIONS:\n");
-    fprintf(stderr, "-c     Only check file for vendor format and metadata\n");
-    fprintf(stderr, "-n     Specify pseudo label name (e.g. -n \"labelname\")\n");
-    fprintf(stderr, "-m     If flag is set, macro image will NOT be deleted\n");
-    fprintf(stderr, "-i     If flag is set, anonymization will be done in-place\n");
-    fprintf(stderr, "-u     If flag is set, tiff directory will NOT be unlinked\n\n");
-    fprintf(stderr, "       Note: For file formats using JPEG compression this does not work currently.\n\n");
+    fprintf(stdout, "Usage: %s [FILE] [-OPTIONS]\n\n", get_app_name());
+    fprintf(stdout, "OPTIONS:\n");
+    fprintf(stdout, "-c     Only check file for vendor format and metadata\n");
+    fprintf(stdout, "-n     Specify pseudo label name (e.g. -n \"labelname\")\n");
+    fprintf(stdout, "-m     If flag is set, macro image will NOT be deleted\n");
+    fprintf(stdout, "-i     If flag is set, anonymization will be done in-place\n");
+    fprintf(stdout, "-u     If flag is set, tiff directory will NOT be unlinked\n\n");
+    fprintf(stdout, "       Note: For file formats using JPEG compression this does not work currently.\n\n");
 }
 
 void print_metadata(struct wsi_data *wsi_data) {

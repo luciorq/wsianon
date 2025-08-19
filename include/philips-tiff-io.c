@@ -385,7 +385,9 @@ int32_t handle_philips_tiff(const char **filename, const char *new_label_name, b
     anonymize_philips_metadata(fp, file);
 
     // clean up
-    free((void *)(*filename));
+    if (!do_inplace) {
+        free((void *)(*filename));
+    }
     free_tiff_file(file);
     file_close(fp);
     return result;

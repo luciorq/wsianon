@@ -61,6 +61,8 @@ const char *slice_str(const char *value, size_t start, size_t end);
 // file operations
 const char *duplicate_file(const char *filename, const char *new_file_name, const char *file_extension);
 
+int32_t is_safe_filename(const char *filename);
+
 int32_t copy_file_v2(const char *src, const char *dest);
 
 int32_t copy_directory(const char *src, const char *dest);

@@ -300,7 +300,9 @@ int32_t handle_isyntax(const char **filename, const char *new_label_name, bool k
     anonymize_isyntax_metadata(fp, header_size);
 
     // clean up
-    free((char *)(*filename));
+    if (!do_inplace) {
+        free((void *)(*filename));
+    }
     file_close(fp);
     return result;
 }

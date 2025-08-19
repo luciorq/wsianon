@@ -366,7 +366,9 @@ int32_t handle_aperio(const char **filename, const char *new_label_name, bool ke
     }
 
     // clean up
-    free((void *)(*filename));
+    if (!do_inplace) {
+        free((void *)(*filename));
+    }
     free_tiff_file(file);
     file_close(fp);
     return result;
