@@ -3,31 +3,32 @@
 
 package_name := 'wsianon'
 
-# github_org := 'luciorq'
-
 @default:
   just --choose
 
 @install:
-  #!/usr/bin/env -vS bash -i
+  #!/usr/bin/env bash
   \builtin set -euxo pipefail;
-  conda create -n wsianon-env -y --override-channels -c conda-forge python pytest;
-  conda run -n wsianon-env python -m pip install -e "{{ justfile_directory() }}";
+  pixi install;
+  pixi run python -m pip install -e "{{ justfile_directory() }}[examples,docs,tests]";
 
 @remove: clean
-  #!/usr/bin/env -vS bash -i
+  #!/usr/bin/env bash
   \builtin set -euxo pipefail;
-  conda run -n wsianon-env python -m pip uninstall -y wsianon;
+  pixi run python -m pip uninstall -y wsianon;
 
 @clean:
-  #!/usr/bin/env -vS bash -i
+  #!/usr/bin/env bash
   \builtin set -euxo pipefail;
   \rm -rf ./build/;
   \rm -rf ./src/{{ package_name }}.egg-info;
   \rm -rf ./src/{{ package_name }}/__pycache__;
   \rm -f ./src/{{ package_name }}/lib{{ package_name }}*.so;
 
-@test-apps:
-  #!/usr/bin/env -vS bash -i
+@test:
+  #!/usr/bin/env bash
   \builtin set -euxo pipefail;
-  conda run -n wsianon-env python -m pytest "{{ justfile_directory() }}"/tests/*.py;
+  pixi run python -m wsianon --help;
+  pixi run wsianon --help;
+  pixi run ruff check;
+  pixi run python -m pytest -vvv;
