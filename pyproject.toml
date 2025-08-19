@@ -56,3 +56,25 @@ Source = "https://github.com/luciorq/wsianon"
 
 [tool.setuptools_scm]
 version_file = "src/wsianon/__about__.py"
+
+[tool.pytest.ini_options]
+addopts = "--doctest-modules"
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
+
+[tool.pixi.pypi-dependencies]
+wsianon = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+docs = { features = ["docs"], solve-group = "default" }
+tests = { features = ["tests"], solve-group = "default" }
+
+[tool.pixi.tasks]
+test = "python -m pytest"
+
+[tool.pixi.dependencies]
+python = ">=3.13.5,<3.14"
+pip = ">=25.2,<26"
