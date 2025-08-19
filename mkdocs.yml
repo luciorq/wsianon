@@ -1,0 +1,4 @@
+site_name: "Whole Slide Images Anonymization Library"
+site_url: https://luciorq.github.io/wsianon/
+theme:
+  name: material
