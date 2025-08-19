@@ -370,50 +370,90 @@ const char *duplicate_file(const char *filename, const char *new_file_name, cons
     }
 }
 
+// function sanitizes a filename string that is used in a syscall
+int32_t is_safe_filename(const char *filename) {
+    while (*filename) {
+        unsigned char c = (unsigned char)*filename;
+
+        // 0-32 are control characters (e.g. backspace, escape etc.) and DEL (127)
+        if (c < 32 || c == 127)
+            return -1;
+
+        // here we escape the most dangerous shell-related characters
+        // this should cover at least the most common attack scenarios
+        switch (c) {
+        case '`':
+        case '$':
+        case '&':
+        case ';':
+        case '|':
+        case '>':
+        case '<':
+        case '*':
+        case '?':
+        case '!':
+        case '"':
+        case '\'':
+        case '\n':
+        case '\r':
+            return -1;
+        }
+
+        // all others: allowed (includes /, \, (), _, -, space, etc.)
+        filename++;
+    }
+    return 1;
+}
+
 int32_t copy_file_v2(const char *src, const char *dest) {
     char command[strlen(src) + strlen(dest) + 15];
+
+    if (!is_safe_filename(src) || !is_safe_filename(dest)) {
+        fprintf(stderr, "Error: Possible malicous filename detected. Consider renaming file or output filename.\n");
+        return -1;
+    }
+
 #ifdef __linux__
-    // we create the copy command for linux
-    snprintf(command, sizeof command, "cp \"%s\" \"%s\"%c", src, dest, '\0');
+    // create the copy command for Linux
+    snprintf(command, sizeof command, "cp \"%s\" \"%s\"", src, dest);
     return system(command);
 #elif defined(__APPLE__) && defined(__MACH__)
-    // we create the copy command for MacOS
-    snprintf(command, sizeof command, "cp \"%s\" \"%s\"%c", src, dest, '\0');
+    // create the copy command for macOS
+    snprintf(command, sizeof command, "cp \"%s\" \"%s\"", src, dest);
     return system(command);
-#elif _WIN32
-    // we create the copy command for win32
-    snprintf(command, sizeof command, "xcopy /Y \"%s\" \"%s\"%c", src, dest, '\0');
-    return system(command);
-#elif _WIN64
-    // we create the copy command for win64
-    snprintf(command, sizeof command, "xcopy /Y \"%s\" \"%s\"%c", src, dest, '\0');
+#elif defined(_WIN32) // this covers both 32-bit and 64-bit Windows
+    // create the copy command for Windows
+    snprintf(command, sizeof command, "xcopy /Y \"%s\" \"%s\"", src, dest);
     return system(command);
 #else
-    // todo: implement for mac
+    // unsupported OS
     return -1;
 #endif
 }
 
 int32_t copy_directory(const char *src, const char *dest) {
-    char command[strlen(src) + strlen(dest) + 15];
+    char command[strlen(src) + strlen(dest) + 50];
+
+    if (!is_safe_filename(src) || !is_safe_filename(dest)) {
+        fprintf(stderr,
+                "Error: Possible malicous filename(s) detected. Consider renaming file(s) or output filename.\n");
+        return -1;
+    }
+
 #ifdef __linux__
-    // we create the copy command for linux
-    snprintf(command, sizeof command, "cp -r \"%s\" \"%s\"%c", src, dest, '\0');
+    // copy directory for Linux
+    snprintf(command, sizeof command, "cp -r \"%s\" \"%s\"", src, dest);
     return system(command);
 #elif defined(__APPLE__) && defined(__MACH__)
-    // we create the copy command for MacOS
-    snprintf(command, sizeof command, "cp -r \"%s\" \"%s\"%c", src, dest, '\0');
+    // copy directory for macOS
+    snprintf(command, sizeof command, "cp -r \"%s\" \"%s\"", src, dest);
     return system(command);
-#elif _WIN32
-    // we create the copy command for win32
-    snprintf(command, sizeof command, "xcopy /Y \"%s\" \"%s\" /s /e%c", src, dest, '\0');
-    return system(command);
-#elif _WIN64
-    // we create the copy command for win64
-    snprintf(command, sizeof command, "xcopy /Y \"%s\" \"%s\" /s /e%c", src, dest, '\0');
+#elif defined(_WIN32)
+    // ensure destination exists before copying
+    snprintf(command, sizeof command, "robocopy \"%s\" \"%s\" /E /NFL /NDL /NJH /NJS /NC /NS /NP > nul", src, dest);
     return system(command);
 #else
-    // todo: implement for mac
+    // unsupported OS
     return -1;
 #endif
 }

@@ -144,7 +144,6 @@ struct ini_group *remove_ini_group_from_array(struct ini_group *groups, int32_t 
                (size_of_array - index_to_remove - 1) * sizeof(struct ini_group));
     }
 
-    free(groups);
     return temp;
 }
 

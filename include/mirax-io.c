@@ -132,10 +132,30 @@ struct metadata *get_metadata_mirax(const char *path, struct ini_file *ini_file,
 
 // free slidedat_ini with all groups and its entries
 void free_slidedata_ini_file(struct ini_file *ini) {
-    for (int32_t i = 0; i < ini->group_count; i++) {
-        free((void *)(&ini->groups[i])->group_identifier);
+    if (ini == NULL)
+        return;
+
+    if (ini->groups != NULL) {
+        for (int32_t i = 0; i < ini->group_count; i++) {
+            if (ini->groups[i].group_identifier != NULL) {
+                free((void *)ini->groups[i].group_identifier);
+            }
+
+            if (ini->groups[i].entries != NULL) {
+                for (int32_t j = 0; j < ini->groups[i].entry_count; j++) {
+                    if (ini->groups[i].entries[j].key != NULL) {
+                        free((void *)ini->groups[i].entries[j].key);
+                    }
+                    if (ini->groups[i].entries[j].value != NULL) {
+                        free((void *)ini->groups[i].entries[j].value);
+                    }
+                }
+                ini->groups[i].entries = NULL;
+            }
+        }
+        ini->groups = NULL;
     }
-    free(ini);
+    ini = NULL;
 }
 
 struct wsi_data *get_wsi_data_mirax(const char *filename) {
@@ -186,7 +206,6 @@ struct wsi_data *get_wsi_data_mirax(const char *filename) {
 
     // cleanup
     free(path);
-    free_slidedata_ini_file(ini);
     free(data_filenames);
     return wsi_data;
 }
@@ -846,7 +865,7 @@ int32_t handle_mirax(const char **filename, const char *new_label_name, bool kee
 
     free(data_filenames);
     free(mirax_file);
-    free(ini);
+    free_slidedata_ini_file(ini);
 
     if (!do_inplace) {
         // override with new filename
