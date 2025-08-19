@@ -254,3 +254,12 @@ git-list-untracked
 alias git-remove-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
 git-remove-untracked
 ```
+
+### Fix tests using openslide and tiffslide
+
+```bash
+pixi add ruff;
+pixi run python -m pip install -e ".[examples,docs,tests]";
+pixi run ruff check;
+pixi run python -m pytest -vvv;
+```

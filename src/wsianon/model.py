@@ -1,6 +1,6 @@
 import ctypes
 from enum import Enum
-from typing import Optional, List
+# from typing import Optional, List
 
 class Vendor(Enum):
     APERIO = 0
