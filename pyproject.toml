@@ -35,6 +35,12 @@ dependencies = []
 docs = [
   "mkdocs-material",
 ]
+tests = [
+  "pytest",
+  "openslide-python",
+  "openslide-bin",
+  "tiffslide",
+]
 
 
 [build-system]
