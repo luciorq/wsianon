@@ -1,9 +1,11 @@
 import ctypes
 import threading
-from typing import Optional
 import glob
+import pathlib
 
-from .model import WSIData
+# from typing import Optional
+
+from wsianon.model import WSIData
 
 lock = threading.Lock()
 
@@ -30,8 +32,6 @@ lock = threading.Lock()
             f"Could not locate {lib_name}. Please ensure the shared library is correctly installed."
         )
  """
-
-import pathlib
 
 def _load_library() -> ctypes.CDLL:
     current_file = pathlib.Path(__file__)

@@ -7,8 +7,8 @@ import pytest
 import openslide
 import tiffslide
 
-from ..wsianon import get_wsi_data, anonymize_wsi
-from ..model.model import Vendor
+from wsianon import get_wsi_data, anonymize_wsi
+from wsianon.model import Vendor
 
 lock = threading.Lock()
 
@@ -101,7 +101,7 @@ def test_anonymize_aperio_format_tiffslide(cleanup, wsi_filepath, original_filen
                 else:
                     pass
         slide.close()
-    except tiffslide.TiffFileError as e:
+    except tiffslide.TiffFileError:
         assert False
 
     cleanup(str(result_filename.absolute()))
@@ -162,7 +162,7 @@ def test_anonymize_file_format_openslide(cleanup, wsi_filepath, original_filenam
                     assert all(c == "X" for c in slide.properties[f"mirax.GENERAL.{property}"])
                 else:
                     assert("01/01/00 00:00:00" == slide.properties[f"mirax.GENERAL.{property}"])
-            assert all(c == "0" for c in slide.properties[f"mirax.GENERAL.SLIDE_ID"])
+            assert all(c == "0" for c in slide.properties["mirax.GENERAL.SLIDE_ID"])
 
         if "Ventana" in wsi_filepath:
             for property in ["UnitNumber", "UserName", "BuildDate"]:
