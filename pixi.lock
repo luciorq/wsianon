@@ -2233,8 +2233,8 @@ packages:
   requires_python: '>=3.8'
 - pypi: ./
   name: wsianon
-  version: 0.1.dev27+g40ba8f5ed.d20250819
-  sha256: fc1f54a4bd74dc6a60ac3e7fcb3f863dc25ee491a1005c2e19bb26f4df24e957
+  version: 0.1.dev28+gbd5f9aa0a.d20250819
+  sha256: ff69e8eb7c6003fcf1c4e5c32bb6a908214d270c4a88b25ab2f678ca6fd6de29
   requires_dist:
   - mkdocs-material ; extra == 'docs'
   - pytest ; extra == 'tests'

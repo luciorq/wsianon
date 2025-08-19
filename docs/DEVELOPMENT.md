@@ -258,5 +258,8 @@ git-remove-untracked
 ### Fix tests using openslide and tiffslide
 
 ```bash
+pixi add ruff;
+pixi run python -m pip install -e ".[examples,docs,tests]";
+pixi run ruff check;
 pixi run python -m pytest -vvv;
 ```
