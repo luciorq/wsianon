@@ -243,3 +243,14 @@ pixi add python pip;
 pixi run python -m pip install -e ".[examples,docs,tests]";
 pixi run python -m pytest -vvv;
 ```
+
+After accepting Pull Request
+
+```bash
+git remote prune --dry-run origin
+git remote prune origin
+alias git-list-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}"'
+git-list-untracked
+alias git-remove-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
+git-remove-untracked
+```
