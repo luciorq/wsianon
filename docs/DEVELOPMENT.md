@@ -203,6 +203,38 @@ gh repo view --web;
 
 ---
 
+## Install docs and test tools
+
+Trying pixi with pip for installing deps;
+
+```bash
+pixi add python pip;
+pixi run python -m pip install -e ".[examples,docs,tests]";
+pixi run python -m pytest -vvv;
+```
+
+After accepting Pull Request
+
+```bash
+git remote prune --dry-run origin
+git remote prune origin
+alias git-list-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}"'
+git-list-untracked
+alias git-remove-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
+git-remove-untracked
+```
+
+### Fix tests using openslide and tiffslide
+
+```bash
+pixi add ruff;
+pixi run python -m pip install -e ".[examples,docs,tests]";
+pixi run ruff check;
+pixi run python -m pytest -vvv;
+```
+
+---
+
 ## Updating After Merge and Update of Upstream
 
 Working again on this project for the URSSI 2025 Summer School.
@@ -210,7 +242,7 @@ Working again on this project for the URSSI 2025 Summer School.
 Date: 2025-08-18.
 
 ```bash
-cd ~/projects/wsianon
+# cd ~/projects/wsianon
 
 git -C ~/projects/forks/wsi-anon/ status
 git -C ~/projects/forks/wsi-anon/ remote -v
@@ -236,29 +268,7 @@ cp ~/projects/forks/wsi-anon/LICENSE ./include/;
 rm -rf ./temp;
 ```
 
-Trying pixi with pip for installing deps;
-
 ```bash
-pixi add python pip;
-pixi run python -m pip install -e ".[examples,docs,tests]";
-pixi run python -m pytest -vvv;
-```
-
-After accepting Pull Request
-
-```bash
-git remote prune --dry-run origin
-git remote prune origin
-alias git-list-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}"'
-git-list-untracked
-alias git-remove-untracked='git fetch --prune && git branch -r | awk "{print \$1}" | grep -E -v -f /dev/fd/0 <(git branch -vv | grep origin) | awk "{print \$1}" | xargs git branch -d'
-git-remove-untracked
-```
-
-### Fix tests using openslide and tiffslide
-
-```bash
-pixi add ruff;
 pixi run python -m pip install -e ".[examples,docs,tests]";
 pixi run ruff check;
 pixi run python -m pytest -vvv;
