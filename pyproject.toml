@@ -26,8 +26,16 @@ classifiers = [
   "Topic :: Scientific/Engineering :: Medical Science Apps.",
   "Topic :: Software Development :: Libraries :: Python Modules",
 ]
-dependencies = []
+
 scripts = { wsianon = "wsianon:main" }
+
+dependencies = []
+
+[project.optional-dependencies]
+docs = [
+  "mkdocs-material",
+]
+
 
 [build-system]
 requires = [
