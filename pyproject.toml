@@ -1,30 +1,47 @@
 [project]
 name = "wsianon"
-dynamic = ["version"]
-description = "Whole Slide Images anonymization library"
-readme = "README.md"
-requires-python = ">=3.8"
-license = { file = "LICENSE" }
-keywords = []
+dynamic = [ "version" ]
+description = "Whole Slide Imaging Anonymization Library"
 authors = [
   { name = "luciorq", email = "luciorqueiroz@gmail.com" },
+  { name = "EMPAIA" },
+]
+maintainers = [
+  { name = "luciorq", email = "luciorqueiroz@gmail.com" },
+]
+readme = { file = "README.md", content-type = "text/markdown" }
+license = "MIT"
+license-files = [
+  "LICENSE.txt",
+  "include/LICENSE",
+]
+keywords = [
+  "digital pathology",
+  "pathology",
+  "whole slide imaging",
+  "anonymization",
+  "de-identification",
 ]
 classifiers = [
-  "Development Status :: 4 - Beta",
+  # "Development Status :: 4 - Beta",A
+  "Development Status :: 3 - Alpha",
   "Programming Language :: Python",
-  "Programming Language :: Python :: 3.8",
-  "Programming Language :: Python :: 3.9",
+  # "Programming Language :: Python :: 3.8",
+  # "Programming Language :: Python :: 3.9",
   "Programming Language :: Python :: 3.10",
   "Programming Language :: Python :: 3.11",
   "Programming Language :: Python :: 3.12",
   "Programming Language :: Python :: Implementation :: CPython",
-  "Programming Language :: Python :: Implementation :: PyPy",
+  #  "Programming Language :: Python :: Implementation :: PyPy",
   "Topic :: Scientific/Engineering :: Artificial Intelligence",
   "Topic :: Scientific/Engineering :: Bio-Informatics",
   "Topic :: Scientific/Engineering :: Image Processing",
   "Topic :: Scientific/Engineering :: Image Recognition",
   "Topic :: Scientific/Engineering :: Medical Science Apps.",
   "Topic :: Software Development :: Libraries :: Python Modules",
+  "Intended Audience :: Science/Research",
+  "Intended Audience :: Education",
+  "License :: OSI Approved :: MIT License",
 ]
 
 scripts = { wsianon = "wsianon.wsianon:main" }
@@ -42,6 +59,20 @@ tests = [
   "tiffslide",
 ]
 
+[project.scripts]
+wsianon = "wsianon.wsianon:main"
+
+[project.urls]
+homepage = "https://github.com/luciorq/wsianon#readme"
+source = "https://github.com/luciorq/wsianon"
+download = "https://github.com/luciorq/wsianon/releases"
+# changelog = "https://github.com/luciorq/wsianon/blob/main/CHANGELOG.md"
+# releasenotes = "https://github.com/luciorq/wsianon/releases"
+documentation = "https://github.com/luciorq/wsianon#readme"
+issues = "https://github.com/luciorq/wsianon/issues"
+# funding = ""
+
+# ============== END of project table ========================
 
 [build-system]
 requires = [
@@ -50,12 +81,6 @@ requires = [
   "wheel"
 ]
 build-backend = "setuptools.build_meta"
-
-
-[project.urls]
-Documentation = "https://github.com/luciorq/wsianon#readme"
-Issues = "https://github.com/luciorq/wsianon/issues"
-Source = "https://github.com/luciorq/wsianon"
 
 # [tool.setuptools]
 # py-modules = ["wsianon"]
