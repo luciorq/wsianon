@@ -11,7 +11,6 @@ retrieve metadata from WSI files.
 - Retrieve metadata from WSI files.
 - Support for multiple WSI formats including SVS, NDPI, and more.
 
-
 ## How to install
 
 Directly from GitHub:
@@ -41,7 +40,8 @@ wsianon --input 'path/to/input.svs|ndpi|mrsx' --label "anonymized_wsi"
 
 ## Acknowledgements
 
-This project is based on the EMPAIA WSI Anon C library. Special thanks to the contributors of the original project.
+This project is based on the EMPAIA WSI Anon C library.
+Special thanks to the contributors of the original project.
 
 ## Development
 
@@ -52,4 +52,13 @@ refer to the documentation [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md).
 pixi init;
 pixi add python pip;
 pixi run python -m pip install -e ".[examples,docs,tests]";
+```
+
+Using `uv`
+
+```bash
+uv pip install -e ".[examples,docs,tests]";
+uv tool run ruff check;
+uv tool run rumdl check;
+uv tool run pytest;
 ```

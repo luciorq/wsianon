@@ -9,7 +9,8 @@ New module code written in `src/wsianon` directory.
 ### Syncing C library from remote
 
 ```bash
-# TODO: @luciorq `macos-support` has already been merged in the main (master) branch.
+# TODO: @luciorq `macos-support` has already been merged in
+# + the main (master) branch.
 # Initial clone: `git clone -b macos-support https://github.com/luciorq/wsi-anon ./temp/`;
 
 git clone -b macos-support https://github.com/luciorq/wsi-anon ./temp/
@@ -27,6 +28,7 @@ Test data is acquired from the [Openslide project](https://openslide.cs.cmu.edu/
 ---
 
 <!--
+
 ## First try using Hatch
 
 > NOTE: Not working properly, since you still needs to compile the C library
@@ -41,6 +43,7 @@ conda create -n hatch-env -y hatch;
 alias hatch='conda run -n hatch-env hatch';
 hatch new --init;
 ```
+
 ### Create Python development env with conda
 
 Test environment: `pytest`, `openslide`, and `tiffslide` are using for testing,
@@ -99,7 +102,9 @@ conda run -n wsianon-env python -c 'from wsianon import wsianon';
 ```bash
 conda run -n wsianon-env python -c 'from wsianon import wsianon; wsianon.anonymize_wsi("../wsi-tools/data/input/CMU-1-Small-Region.svs", new_label_name = "wsianon_test")';
 
-conda run -n wsianon-env python -c 'from wsianon import wsianon; wsianon.get_wsi_data("../wsi-tools/data/input/CMU-1-Small-Region.svs")';
+conda run -n wsianon-env \
+  python -c \
+  'from wsianon import wsianon; wsianon.get_wsi_data("../wsi-tools/data/input/CMU-1-Small-Region.svs")';
 ```
 
 Testing with python
@@ -256,7 +261,10 @@ git -C ~/projects/forks/wsi-anon/ branch
 
 git -C ~/projects/forks/wsi-anon/ pull
 
-git -C ~/projects/forks/wsi-anon/ log --graph --pretty=format:"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) %C(cyan)<%an>%Creset" --abbrev-commit;
+git -C ~/projects/forks/wsi-anon/ log \
+  --graph \
+  --pretty=format:"%C(magenta)%h%Creset -%C(red)%d%Creset %s %C(dim green)(%cr) %C(cyan)<%an>%Creset" \
+  --abbrev-commit;
 
 # Prepare build project
 ls -lah ./include;

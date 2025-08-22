@@ -41,7 +41,9 @@ classifiers = [
   "Topic :: Software Development :: Libraries :: Python Modules",
   "Intended Audience :: Science/Research",
   "Intended Audience :: Education",
-  "License :: OSI Approved :: MIT License",
+  # TODO: @luciorq newer setuptools complains about license classifiers
+  # +  setuptools.errors.InvalidConfigError: License classifiers have been superseded by license expressions (see https://peps.python.org/pep-0639/). Please remove:
+  # "License :: OSI Approved :: MIT License",
 ]
 
 # Follow Spec 0?
@@ -84,7 +86,6 @@ issues = "https://github.com/luciorq/wsianon/issues"
 requires = [
   "setuptools >= 77.0.3",
   "setuptools_scm",
-  "wheel",
 ]
 build-backend = "setuptools.build_meta"
 
