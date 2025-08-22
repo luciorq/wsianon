@@ -44,11 +44,17 @@ classifiers = [
   "License :: OSI Approved :: MIT License",
 ]
 
-scripts = { wsianon = "wsianon.wsianon:main" }
+# Follow Spec 0?
+# requires-python = ">=3.8"
+requires-python = ">=3.10"
 
 dependencies = []
 
 [project.optional-dependencies]
+cli = [
+  "rich",
+  "click",
+]
 docs = [
   "mkdocs-material",
 ]
@@ -76,9 +82,9 @@ issues = "https://github.com/luciorq/wsianon/issues"
 
 [build-system]
 requires = [
-  "setuptools>=61",
+  "setuptools >= 77.0.3",
   "setuptools_scm",
-  "wheel"
+  "wheel",
 ]
 build-backend = "setuptools.build_meta"
 
