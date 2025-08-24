@@ -2233,15 +2233,12 @@ packages:
   requires_python: '>=3.8'
 - pypi: ./
   name: wsianon
-  version: 0.1.dev28+gbd5f9aa0a.d20250819
-  sha256: ff69e8eb7c6003fcf1c4e5c32bb6a908214d270c4a88b25ab2f678ca6fd6de29
+  version: 0.1.dev38+ga68f2eeea.d20250822
+  sha256: 15576a00ee24485c0a83ae671a905a67a9f73d4f2e54452103e4acd0c4b00585
   requires_dist:
-  - mkdocs-material ; extra == 'docs'
-  - pytest ; extra == 'tests'
-  - openslide-python ; extra == 'tests'
-  - openslide-bin ; extra == 'tests'
-  - tiffslide ; extra == 'tests'
-  requires_python: '>=3.8'
+  - rich ; extra == 'cli'
+  - click ; extra == 'cli'
+  requires_python: '>=3.10'
   editable: true
 - pypi: https://files.pythonhosted.org/packages/5e/d8/9ffd8c237b3559945bb52103cf0eed64ea098f7b7f573f8d2962ef27b4b2/zarr-2.18.7-py3-none-any.whl
   name: zarr

@@ -47,18 +47,3 @@ Special thanks to the contributors of the original project.
 
 For development instructions,
 refer to the documentation [docs/DEVELOPMENT.md](./docs/DEVELOPMENT.md).
-
-```bash
-pixi init;
-pixi add python pip;
-pixi run python -m pip install -e ".[examples,docs,tests]";
-```
-
-Using `uv`
-
-```bash
-uv pip install -e ".[examples,docs,tests]";
-uv tool run ruff check;
-uv tool run rumdl check;
-uv tool run pytest;
-```

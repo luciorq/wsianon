@@ -57,6 +57,16 @@ cli = [
   "rich",
   "click",
 ]
+
+[dependency-groups]
+all = [
+  { include-group = "examples" },
+  { include-group = "docs" },
+  { include-group = "tests" },
+]
+examples = [
+  "jupyter",
+]
 docs = [
   "mkdocs-material",
 ]
@@ -84,8 +94,8 @@ issues = "https://github.com/luciorq/wsianon/issues"
 
 [build-system]
 requires = [
-  "setuptools >= 77.0.3",
-  "setuptools_scm",
+  "setuptools>=80",
+  "setuptools-scm>=8"
 ]
 build-backend = "setuptools.build_meta"
 

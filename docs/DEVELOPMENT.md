@@ -277,7 +277,23 @@ rm -rf ./temp;
 ```
 
 ```bash
-pixi run python -m pip install -e ".[examples,docs,tests]";
-pixi run ruff check;
-pixi run python -m pytest -vvv;
+# pixi run python -m pip install -e ".[examples,docs,tests]";
+# pixi run ruff check;
+# pixi run python -m pytest -vvv;
+```
+
+```bash
+pixi init;
+pixi add python pip;
+pixi run python -m pip install --group=all -e ".[cli]";
+```
+
+Using `uv`
+
+```bash
+# uv pip install --extra cli .;
+uv pip install --group=all -e ".[cli]";
+uv tool run ruff check;
+uv tool run rumdl check;
+uv tool run pytest;
 ```
