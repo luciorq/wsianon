@@ -284,16 +284,36 @@ rm -rf ./temp;
 
 ```bash
 pixi init;
-pixi add python pip;
-pixi run python -m pip install --group=all -e ".[cli]";
+pixi add python uv;
+pixi run uv pip install -e ".[cli]";
 ```
 
 Using `uv`
 
 ```bash
 # uv pip install --extra cli .;
-uv pip install --group=all -e ".[cli]";
-uv tool run ruff check;
-uv tool run rumdl check;
-uv tool run pytest;
+pixi run uv pip install -e ".[cli]";
+
+pixi run uv tool run ruff check;
+pixi run uv tool run rumdl check;
+pixi run uv run --group docs mkdocs;
+pixi run uv run --group tests pytest;
 ```
+
+## Using Pixi only with embedded `uv`
+
+Date: 2025-08-25.
+
+Remove uv and pip from env.
+
+```bash
+pixi remove pip
+pixi remove uv
+```
+
+Or starting fresh with pixi on a project that already have `pyproject.toml`.
+
+```bash
+pixi init --scm github -p "win-64" -p "linux-64" -p "osx-arm64" -p "osx-64" --format pyproject.toml -c conda-forge -vv
+```
+
