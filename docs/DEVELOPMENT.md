@@ -304,6 +304,8 @@ pixi run uv run --group tests pytest;
 
 Date: 2025-08-25.
 
+Testing 100% `pixi` managed development, but using PyPI dependencies.
+
 Remove uv and pip from env.
 
 ```bash
@@ -314,6 +316,64 @@ pixi remove uv
 Or starting fresh with pixi on a project that already have `pyproject.toml`.
 
 ```bash
-pixi init --scm github -p "win-64" -p "linux-64" -p "osx-arm64" -p "osx-64" --format pyproject.toml -c conda-forge -vv
+# maybe add `-c ome` because of `bftools` (bioformats)
+pixi init --scm github -p "win-64" -p "linux-64" -p "osx-arm64" -p "osx-64" --format pyproject -c conda-forge -vv
+```
+
+Example output.
+
+```txt
+|> pixi init --scm github -p "win-64" -p "linux-64" -p "osx-arm64" -p "osx-64" --format pyproject -c conda-forge -vv
+DEBUG pixi_config: Loading config from /etc/pixi/config.toml
+DEBUG pixi_config: Loading config from /Users/luciorq/.config/pixi/config.toml
+DEBUG pixi_config: Loading config from /Users/luciorq/Library/Application Support/pixi/config.toml
+DEBUG pixi_config: Loading config from /Users/luciorq/.pixi/config.toml
+DEBUG pixi_config: Loaded config from: /Users/luciorq/.pixi/config.toml
+✔ Added package 'wsianon' as an editable dependency.
+✔ Added environments 'examples', 'docs', 'cli', 'tests' from optional dependencies or dependency groups.
+```
+
+Snippet from `pyproject.toml`.
+
+```toml
+...
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
+
+[tool.pixi.pypi-dependencies]
+wsianon = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+cli = { features = ["cli"], solve-group = "default" }
+docs = { features = ["docs"], solve-group = "default" }
+examples = { features = ["examples"], solve-group = "default" }
+tests = { features = ["tests"], solve-group = "default" }
+
+[tool.pixi.tasks]
+```
+
+Adding tasks to run on each environment.
+
+```bash
+# TODO: Add actual tasks to run linting, docs, and tests.
+
+# Task that simulate:
+pixi run -e lint ruff check
+
+pixi run -e lint rumdl check
+
+pixi run -e tests python -m pytest -vvv
+
+pixi run -e docs python -m mkdocs build
+
+pixi run wsianon --help
+
+pixi run -e cli wsianon --help
+
+pixi tasks ...
+
 ```
 

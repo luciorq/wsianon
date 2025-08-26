@@ -71,6 +71,10 @@ tests = [
   "openslide-bin",
   "tiffslide",
 ]
+lint = [
+  "ruff",
+  "rumdl",
+]
 
 [project.scripts]
 wsianon = "wsianon.wsianon:main"
@@ -121,3 +125,20 @@ addopts = "--doctest-modules"
 # [tool.pixi.pypi-dependencies]
 # wsianon = { path = ".", editable = true, extras = ["cli"] }
 
+
+[tool.pixi.workspace]
+channels = ["conda-forge"]
+platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
+
+[tool.pixi.pypi-dependencies]
+wsianon = { path = ".", editable = true }
+
+[tool.pixi.environments]
+default = { solve-group = "default" }
+cli = { features = ["cli"], solve-group = "default" }
+docs = { features = ["docs"], solve-group = "default" }
+examples = { features = ["examples"], solve-group = "default" }
+tests = { features = ["tests"], solve-group = "default" }
+lint = { features = ["lint"] }
+
+[tool.pixi.tasks]
