@@ -13,7 +13,7 @@ readme = { file = "README.md", content-type = "text/markdown" }
 license = "MIT"
 license-files = [
   "LICENSE.txt",
-  "include/LICENSE",
+  "include/LICENSE.txt",
 ]
 keywords = [
   "digital pathology",
@@ -98,8 +98,31 @@ requires = [
 ]
 build-backend = "setuptools.build_meta"
 
-# [tool.setuptools]
-# py-modules = ["wsianon"]
+[tool.setuptools]
+ext-modules = [
+{ name = "wsianon.libwsianon", sources = [
+  "include/aperio-flavor-io.c",
+  "include/b64.c",
+  "include/buf.c",
+  "include/conf.c",
+  # "include/console-app.c",
+  "include/enc.c",
+  "include/hamamatsu-io.c",
+  "include/huff.c",
+  "include/ini-parser.c",
+  "include/isyntax-io.c",
+  # "include/js-file.c",
+  "include/mirax-io.c",
+  "include/native-file.c",
+  "include/philips-based-io.c",
+  "include/philips-tiff-io.c",
+  "include/tiff-based-io.c",
+  "include/utils.c",
+  "include/ventana-io.c",
+  # "include/wsi-anonymizer-wasm.c",
+  "include/wsi-anonymizer.c"
+], language = "c" }
+]
 
 [tool.setuptools_scm]
 version_file = "src/wsianon/__about__.py"
@@ -107,31 +130,17 @@ version_file = "src/wsianon/__about__.py"
 [tool.pytest.ini_options]
 addopts = "--doctest-modules"
 
-# [tool.pixi.workspace]
-# channels = ["conda-forge"]
-# platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
-
-# [tool.pixi.environments]
-# default = { solve-group = "default" }
-# docs = { features = ["docs"], solve-group = "default" }
-# tests = { features = ["tests"], solve-group = "default" }
-
-# [tool.pixi.tasks]
-# test = "python -m pytest"
-
-# [tool.pixi.dependencies]
-# python = ">=3.13.5,<3.14"
-
-# [tool.pixi.pypi-dependencies]
-# wsianon = { path = ".", editable = true, extras = ["cli"] }
-
 
 [tool.pixi.workspace]
 channels = ["conda-forge"]
 platforms = ["win-64", "linux-64", "osx-arm64", "osx-64"]
 
+[tool.pixi.dependencies]
+pip = ">=25.2,<26"
+
 [tool.pixi.pypi-dependencies]
 wsianon = { path = ".", editable = true }
+# wsianon = { path = ".", editable = true, extras = ["cli"] }
 
 [tool.pixi.environments]
 default = { solve-group = "default" }
@@ -139,6 +148,7 @@ cli = { features = ["cli"], solve-group = "default" }
 docs = { features = ["docs"], solve-group = "default" }
 examples = { features = ["examples"], solve-group = "default" }
 tests = { features = ["tests"], solve-group = "default" }
-lint = { features = ["lint"] }
+lint = { features = ["lint"], solve-group = "default" }
 
 [tool.pixi.tasks]
+
