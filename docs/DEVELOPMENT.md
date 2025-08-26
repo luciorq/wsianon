@@ -336,7 +336,7 @@ DEBUG pixi_config: Loaded config from: /Users/luciorq/.pixi/config.toml
 Snippet from `pyproject.toml`.
 
 ```toml
-...
+[...]
 
 [tool.pixi.workspace]
 channels = ["conda-forge"]
@@ -355,7 +355,7 @@ tests = { features = ["tests"], solve-group = "default" }
 [tool.pixi.tasks]
 ```
 
-Adding tasks to run on each environment.
+The following commands should be transformed in tasks.
 
 ```bash
 # TODO: Add actual tasks to run linting, docs, and tests.
@@ -365,15 +365,64 @@ pixi run -e lint ruff check
 
 pixi run -e lint rumdl check
 
+# Run Tests
 pixi run -e tests python -m pytest -vvv
 
+# Run Docs
 pixi run -e docs python -m mkdocs build
 
+# Run CLI
 pixi run wsianon --help
 
 pixi run -e cli wsianon --help
 
-pixi tasks ...
-
+pixi run python -m wsianon --help
+pixi run python -m wsianon
 ```
 
+Adding tasks to run on each environment.
+
+```bash
+pixi tasks ...
+```
+
+### Removing `setup.py`
+
+Moving `setup.py` Extension table to `pyproject.toml`.
+
+```toml
+[build-system]
+requires = [
+  "setuptools>=80",
+  "setuptools-scm>=8"
+]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+ext-modules = [
+{ name = "wsianon.libwsianon", sources = [
+  "include/aperio-flavor-io.c",
+  "include/b64.c",
+  "include/buf.c",
+  "include/conf.c",
+  # "include/console-app.c",
+  "include/enc.c",
+  "include/hamamatsu-io.c",
+  "include/huff.c",
+  "include/ini-parser.c",
+  "include/isyntax-io.c",
+  # "include/js-file.c",
+  "include/mirax-io.c",
+  "include/native-file.c",
+  "include/philips-based-io.c",
+  "include/philips-tiff-io.c",
+  "include/tiff-based-io.c",
+  "include/utils.c",
+  "include/ventana-io.c",
+  # "include/wsi-anonymizer-wasm.c",
+  "include/wsi-anonymizer.c"
+], language = "c" }
+]
+```
+
+Until now I couldn't find the the right of using globs or patterns in the `sources` list.
